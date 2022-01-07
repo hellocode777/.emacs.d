@@ -10,7 +10,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(doom-themes use-package company evil evil-escape evil-leader monokai-theme zenburn-theme helm-themes hungry-delete smex swiper counsel smartparens fzf ccls eglot lsp-mode lsp-ui flycheck yasnippet lsp-treemacs helm-lsp lsp-ivy hydra avy which-key helm-xref dap-mode bm rg helm-lsp project magit shell-pop treemacs treemacs-evil treemacs-projectile doom-modeline))
+   '(auto-complete doom-themes use-package company evil evil-escape evil-leader monokai-theme zenburn-theme helm-themes hungry-delete smex swiper counsel smartparens fzf ccls eglot lsp-mode lsp-ui flycheck yasnippet lsp-treemacs helm-lsp lsp-ivy hydra avy which-key helm-xref dap-mode bm rg helm-lsp project magit shell-pop treemacs treemacs-evil treemacs-projectile doom-modeline))
  '(shell-pop-autocd-to-working-dir t)
  '(shell-pop-cleanup-buffer-at-process-exit t)
  '(shell-pop-default-directory "/Users/kyagi/git")
