@@ -23,10 +23,12 @@
   "w" 'evil-window-next
   "/" 'zss-rg-dwim-project-dir
   ">" 'zssr-rg-dwim-project-dir
+  "<" 'zss-rg-dwim-project-dir1
   "*" 'zs-rg-dwim-project-dir
   "&" 'zsr-rg-dwim-project-dir
-  "r" 'xref-find-references
+  ;;"r" 'xref-find-references
+  "r" 'lsp-ui-peek-find-references
   "o" 'lsp-treemacs-symbols
-  "c" 'lsp-treemacs
+  "c" 'lsp-ui-imenu
   )
 (provide 'init-keybindings)
