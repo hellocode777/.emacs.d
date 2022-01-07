@@ -8,7 +8,7 @@
 
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
-;;(global-linum-mode t)
+(global-linum-mode t)
 ;;(global-linum-mode nil)
 
 ;;;以y/n代表yes/no
