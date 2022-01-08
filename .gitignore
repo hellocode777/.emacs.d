@@ -1,7 +1,8 @@
 HeadFirst/build
 auto-save-list
 bm-repository
-.cache
+.cache/treemacs-persist
+.cache/lsp/clangd/clangd_12.0.0/
 .dap-breakpoints
 .lsp-session-v1
 projects
