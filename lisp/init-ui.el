@@ -8,8 +8,10 @@
 
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
-(global-linum-mode t)
+;;(global-linum-mode t)
 ;;(global-linum-mode nil)
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
 
 ;;;以y/n代表yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
