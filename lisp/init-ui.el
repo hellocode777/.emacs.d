@@ -11,7 +11,7 @@
 ;;(global-linum-mode t)
 ;;(global-linum-mode nil)
 (global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'relative)
+;;(setq display-line-numbers-type 'relative)
 
 ;;;以y/n代表yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -66,8 +66,21 @@ scroll-conservatively 10000)
 
 (add-hook 'c++-mode-common-hook 'gromacs-c++-mode-common-hook)
 
+;; 每行第120的字符的地方一个竖线
+(setq-default fill-column 120)
+(global-display-fill-column-indicator-mode t)
 
+;;每行超过显示不用显示
+(setq-default truncate-lines t)
 
+(global-hl-line-mode t)
+(setq org-log-done 'time)
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 (provide 'init-ui)
 
 ;;; init-ui.el ends here

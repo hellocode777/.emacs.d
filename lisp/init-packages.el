@@ -170,8 +170,17 @@ under the project root directory."
 
 ;;; doom-modeline-mode
 (doom-modeline-mode)
+;;;(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
 
+;;(setq-local ff-ignore-include t)
+;;(setq ff-ignore-include t)
+(setq cc-search-directories '("."
+                              "../include" "../include/*" "../../include/*" "../../../include/*"
+                              "../../include/*/*" "../../../include/*/*/*"
+                              "../src" "../src/*" "../../src/*" "../../../src/*"
+                              "../../src/*/*" "../../../src/*/*/*"
+                              "/usr/include" "/usr/local/include/*"))
 
 
 (setq gc-cons-threshold (* 100 1024 1024)
@@ -185,10 +194,6 @@ under the project root directory."
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (require 'dap-cpptools)
   (yas-global-mode))
-
-
-
-
 
 (which-key-mode)
 (add-hook 'c-mode-hook 'lsp)

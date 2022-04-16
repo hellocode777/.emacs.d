@@ -4,8 +4,6 @@
   (define-key evil-normal-state-map (kbd "j") 'evil-next-line)
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-visual-line))
 
-  ;;;(define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line))
-(global-set-key (kbd "C-c s") 'swiper)
 
 (evil-leader/set-leader "<SPC>")
 
@@ -30,5 +28,7 @@
   "r" 'lsp-ui-peek-find-references
   "o" 'lsp-treemacs-symbols
   "c" 'lsp-ui-imenu
+  "e" 'ff-find-related-file
+  "j" 'ace-jump-word-mode
   )
 (provide 'init-keybindings)
