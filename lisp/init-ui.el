@@ -1,6 +1,14 @@
+;;; init-ui.el --- Measure startup and require times -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(menu-bar-mode -1)
+;;(menu-bar-mode -1)
+(menu-bar-mode t)
+(tab-bar-mode t)
+
+
 
 (setq inhibit-splash-screen t)
 

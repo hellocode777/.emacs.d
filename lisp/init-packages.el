@@ -1,15 +1,21 @@
+;;; init-packages.el --- Measure startup and require times -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
 (setq byte-compile-warnings '(cl-function))
 (require 'cl)
 
 (when (>= emacs-major-version 24)
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
 )
+
 
 (defvar zzss/packages '(
 			use-package
-			company evil
+			company
+			evil
 			evil-escape
 			evil-leader
 			hungry-delete
@@ -31,12 +37,17 @@
 			which-key
 			helm-xref
 			dap-mode
-			;;bm
 			rg
 			helm-lsp
 			project
 			magit
 			doom-modeline
+			markdown-mode
+			doom-themes
+			ace-jump-mode
+			counsel-etags
+			projectile
+			sr-speedbar
                        )"Default packages")
 
 (setq package-selected-packages zzss/packages)
@@ -55,14 +66,18 @@
 
 
 
-
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
 
 
 
 ;;;rg
-(require 'rg)
-(rg-enable-default-bindings)
-(rg-define-search zs-rg-dwim-project-dir
+(use-package rg
+  :config
+  (rg-enable-default-bindings)
+  (rg-define-search zs-rg-dwim-project-dir
   "Search for thing at point in files matching the current file
 under the project root directory."
   :query point
@@ -111,24 +126,27 @@ under the project root directory."
 under the project root directory."
   :format literal
   :files "*.{c,cc,cpp,h,yang,esc,txt}"
-  :dir project)
+  :dir project))
 
 
 ;;;evil-leader
-(require 'evil-leader)
-(global-evil-leader-mode)
+(use-package evil-leader
+  :config
+  (global-evil-leader-mode 1))
 
-(require 'use-package)
-(require 'evil)
-(evil-mode t)
+
+(use-package evil
+  :config
+  (evil-mode 1))
 
 ;;;evil-escape
-(require 'evil-escape)
-(setq evil-escape-excluded-states '(normal visual multiedit emacs motion))
-(setq evil-escape-excluded-major-modes '(neotree-mode treemacs-mode vterm-mode))
-(setq evil-escape-key-sequence "jj")
-(setq evil-escape-delay 0.25)
-(evil-escape-mode)
+(use-package evil-escape
+  :config
+  (setq evil-escape-excluded-states '(normal visual multiedit emacs motion))
+  (setq evil-escape-excluded-major-modes '(neotree-mode treemacs-mode vterm-mode))
+  (setq evil-escape-key-sequence "jj")
+  (setq evil-escape-delay 0.25)
+  (evil-escape-mode 1))
 
 
 ;; company
@@ -138,8 +156,9 @@ under the project root directory."
 
 ;;; hungry-delete
 ;;; delete many one time
-(require 'hungry-delete)
-(global-hungry-delete-mode)
+(use-package hungry-delete
+  :config
+  (global-hungry-delete-mode 1))
 
 
 ;;; flycheck
@@ -148,39 +167,43 @@ under the project root directory."
 
 ;;; helm-mode
 ;;(helm-mode)
-(require 'helm-xref)
-(define-key global-map [remap find-file] #'helm-find-files)
-(define-key global-map [remap execute-extended-command] #'helm-M-x)
-(define-key global-map [remap switch-to-buffer] #'helm-mini)
+(use-package helm-xref
+  :config
+  (define-key global-map [remap find-file] #'helm-find-files)
+  (define-key global-map [remap execute-extended-command] #'helm-M-x)
+  (define-key global-map [remap switch-to-buffer] #'helm-mini))
 
 
 ;;; ccls
-(require 'ccls)
-(setq ccls-executable "~/ccls/bin/ccls")
+(use-package ccls
+  :config
+  (setq ccls-executable "~/ccls/bin/ccls"))
 
 
 ;;; lsp-mode
-(lsp-mode t)
+;;;(lsp-mode)
 (lsp-treemacs-sync-mode 1)
 
 
 ;;; lsp-ui
-(require 'lsp-ui)
+(use-package lsp-ui)
 
 
 ;;; doom-modeline-mode
-(doom-modeline-mode)
+(doom-modeline-mode 1)
 ;;;(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
 
 ;;(setq-local ff-ignore-include t)
 ;;(setq ff-ignore-include t)
-(setq cc-search-directories '("."
+(use-package find-file
+  :config
+  (setq cc-search-directories '("."
                               "../include" "../include/*" "../../include/*" "../../../include/*"
                               "../../include/*/*" "../../../include/*/*/*"
                               "../src" "../src/*" "../../src/*" "../../../src/*"
                               "../../src/*/*" "../../../src/*/*/*"
-                              "/usr/include" "/usr/local/include/*"))
+                              "/usr/include" "/usr/local/include/*")))
 
 
 (setq gc-cons-threshold (* 100 1024 1024)
@@ -199,9 +222,31 @@ under the project root directory."
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 (smartparens-global-mode)
-(ivy-mode)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
+
+(use-package ivy
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers 1)
+  (setq enable-recursive-minibuffers t)
 ;;;(setq xref-prompt-for-identifier nil)
-(setq xref-prompt-for-identifier t)
+  (setq xref-prompt-for-identifier t))
+
+
+;;; gdb
+(setq gdb-show-main 1)
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-monokai-pro t))
+
+;;(semantic-mode t)
+;;(semantic-stickyfunc-mode t)
+
+(use-package doom-modeline
+  :config
+  (doom-modeline-mode 1))
+
 (provide 'init-packages)
+
+;;; init-packages.el ends here

@@ -1,3 +1,8 @@
+;;; init-better-defaults.el --- Measure startup and require times -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
+
 (setq ring-bell-function 'ignore)
 
 (global-auto-revert-mode t)
@@ -35,4 +40,10 @@
  '(shell-pop-restore-window-configuration t)
  '(shell-pop-cleanup-buffer-at-process-exit t))
 
+
+
+;;(semantic-mode 1)
+
 (provide 'init-better-defaults)
+
+;;; init-better-defaults.el ends here

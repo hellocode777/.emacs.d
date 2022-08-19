@@ -8,4 +8,5 @@ projects
 recentf
 snippets
 transient
-elpa
+elpa/
+.gitignore
