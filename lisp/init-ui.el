@@ -6,7 +6,7 @@
 (scroll-bar-mode -1)
 ;;(menu-bar-mode -1)
 (menu-bar-mode t)
-(tab-bar-mode t)
+;;(tab-bar-mode t)
 
 
 
