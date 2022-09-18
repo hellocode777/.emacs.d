@@ -43,11 +43,11 @@
 			magit
 			doom-modeline
 			markdown-mode
-			doom-themes
 			ace-jump-mode
 			counsel-etags
 			projectile
 			sr-speedbar
+			helm-themes
                        )"Default packages")
 
 (setq package-selected-packages zzss/packages)
@@ -235,10 +235,10 @@ under the project root directory."
 ;;; gdb
 (setq gdb-show-main 1)
 
-(use-package doom-themes
+(use-package helm-themes
   :ensure t
   :config
-  (load-theme 'doom-monokai-pro t))
+  (load-theme 'light-blue t))
 
 ;;(semantic-mode t)
 ;;(semantic-stickyfunc-mode t)
