@@ -265,17 +265,6 @@ under the project root directory."
 ;;; gdb
 (setq gdb-show-main 1)
 
-(use-package helm-themes
-  :ensure t
-  :config
-  ;;(load-theme 'doom-Iosvkem t))
-  (load-theme 'monokai t))
-
-;;(use-package doom-themes
-;;  :ensure t
-;;  :config
-;;  (load-theme 'doom-monokai-pro t))
-
 ;;(semantic-mode t)
 ;;(semantic-stickyfunc-mode t)
 
