@@ -3,7 +3,7 @@
 ;;; Code:
 
 (setq byte-compile-warnings '(cl-function))
-(require 'cl)
+(require 'cl-lib)
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -29,16 +29,15 @@
 			lsp-ui
 			flycheck
 			yasnippet
-			lsp-treemacs
-			helm-lsp
-			lsp-ivy
+			;;lsp-treemacs
+			;;helm-lsp
+			;;lsp-ivy
 			hydra
 			avy
 			which-key
 			helm-xref
 			dap-mode
 			rg
-			helm-lsp
 			project
 			magit
 			doom-modeline
@@ -47,15 +46,17 @@
 			counsel-etags
 			projectile
 			sr-speedbar
+			plantuml-mode
+			evil-org
 			helm-themes
                        )"Default packages")
 
 (setq package-selected-packages zzss/packages)
       
 (defun zzss/packages-installed-p ()
-  (loop for pkg in zzss/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
+  (cl-loop for pkg in zzss/packages
+	when (not (package-installed-p pkg)) do (cl-return nil)
+	finally (cl-return t)))
 
 (unless (zzss/packages-installed-p)
   (message "%s" "Refreshing package database...")
@@ -83,7 +84,7 @@ under the project root directory."
   :query point
   :format regexp
   :flags ("--word-regexp")
-  :menu ("Custom" "w" "Word")
+  ;;:menu ("Custom" "w" "Word")
   ;;:format literal
   ;;;:files "all"
   :files "*.{c,cc,cpp,h,yang,esc,txt}"
@@ -95,7 +96,7 @@ under the project root directory."
   :query point
   :format regexp
   :flags ("--word-regexp")
-  :menu ("Custom" "w" "Word")
+  ;;:menu ("Custom" "w" "Word")
   ;;;:format literal
   :files "all"
   :dir project)
@@ -107,7 +108,7 @@ under the project root directory."
   :format regexp
   ;;;:files "all"
   :flags ("--word-regexp")
-  :menu ("Custom" "w" "Word")
+  ;;:menu ("Custom" "w" "Word")
   :files "*.{c,cc,cpp,h,yang,esc,txt}"
   :dir project)
 
@@ -116,7 +117,7 @@ under the project root directory."
 under the project root directory."
   :format regexp
   :flags ("--word-regexp")
-  :menu ("Custom" "w" "Word")
+  ;;:menu ("Custom" "w" "Word")
   ;;:format literal
   :files "all"
   :dir project)
@@ -137,7 +138,8 @@ under the project root directory."
 
 (use-package evil
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  )
 
 ;;;evil-escape
 (use-package evil-escape
@@ -184,26 +186,43 @@ under the project root directory."
 ;;;(lsp-mode)
 (lsp-treemacs-sync-mode 1)
 
-
-;;; lsp-ui
-(use-package lsp-ui)
-
-
-;;; doom-modeline-mode
-(doom-modeline-mode 1)
-;;;(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
-
-
 ;;(setq-local ff-ignore-include t)
 ;;(setq ff-ignore-include t)
 (use-package find-file
   :config
   (setq cc-search-directories '("."
-                              "../include" "../include/*" "../../include/*" "../../../include/*"
-                              "../../include/*/*" "../../../include/*/*/*"
-                              "../src" "../src/*" "../../src/*" "../../../src/*"
-                              "../../src/*/*" "../../../src/*/*/*"
-                              "/usr/include" "/usr/local/include/*")))
+				"../include"
+				"../include/*"
+				"../include/*/*"
+				"../include/*/*/*"
+				"../../include/*"
+				"../../../include/*"
+				"../../include/*/*"
+				"../../../include/*/*/*"
+				"../../../../include/*/*/*/*"
+				"../src"
+				"../src/*"
+				"../../src/*"
+				"../../../src/*"
+				"../../src/*/*"
+				"../../../src/*/*/*"
+				"../../../../src/*/*/*/*"
+				"../test-include"
+				"../test-include/*"
+				"../../test-include/*"
+				"../../../test-include/*"
+				"../../test-include/*/*"
+				"../../../test-include/*/*/*"
+				"../../../../test-include/*/*/*/*"
+				"../test-src"
+				"../test-src/*"
+				"../../test-src/*"
+				"../../../test-src/*"
+				"../../test-src/*/*"
+				"../../../test-src/*/*/*"
+				"../../../../test-src/*/*/*/*"
+				"/usr/include"
+				"/usr/local/include/*")))
 
 
 (setq gc-cons-threshold (* 100 1024 1024)
@@ -235,17 +254,19 @@ under the project root directory."
 ;;; gdb
 (setq gdb-show-main 1)
 
-(use-package helm-themes
-  :ensure t
-  :config
-  (load-theme 'light-blue t))
-
 ;;(semantic-mode t)
 ;;(semantic-stickyfunc-mode t)
 
 (use-package doom-modeline
   :config
-  (doom-modeline-mode 1))
+  (doom-modeline-mode 1)
+  )
+
+(use-package helm-themes
+  :ensure t
+  :init
+  (load-theme 'light-blue t)
+  )
 
 (provide 'init-packages)
 

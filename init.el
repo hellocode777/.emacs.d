@@ -18,7 +18,6 @@
 (require 'init-org)
 (require 'init-keybindings)
 
-;; Local Variables:
 ;; coding: utf-8
 ;; no-byte-compile: t
 ;; End:
